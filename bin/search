@@ -1,0 +1,91 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "ztest"
+
+# You can add fixtures and/or initialization code here to make experimenting
+# with your gem easier. You can also use a different console, if you like.
+
+# (If you use this, don't forget to add pry to your Gemfile!)
+# require "pry"
+# Pry.start
+
+`echo 'hello there'`
+
+require "tty-prompt"
+prompt = TTY::Prompt.new
+
+res = "cc"
+
+
+
+
+STDOUT.puts "------------------- >>"
+
+res = prompt.ask('What is your name?', default: ENV['USER'])
+
+STDOUT.puts "------------------- >> <<"
+
+
+sleep(5)
+
+puts "Res = #{res}"
+
+
+result = prompt.select('What size?') do |menu|
+  menu.choice 'small', 1
+  menu.choice 'medium', 2, disabled: '(out of stock)'
+  menu.choice 'large', 3
+end
+
+puts result.inspect
+
+
+letters = ('A'..'Z').to_a
+prompt.select("Choose your letter?", letters, per_page: 4)
+
+
+result = prompt.collect do
+  key(:name).ask('Name?')
+
+  key(:age).ask('Age?', convert: :int)
+
+  choices = %w(emacs nano vim)
+  key(:editor).enum_select("Select an editor?", choices)
+
+  key(:address) do
+    key(:street).ask('Street?', required: true)
+    key(:city).ask('City?')
+    key(:zip).ask('Zip?', validate: /\A\d{3}\Z/)
+  end
+end
+
+puts result.inspect
+
+
+
+res = prompt.ask('What is your name?', default: ENV['USER'])
+puts "Res = #{res}"
+
+prompt.select("Choose your destiny?", %w(Scorpion Kano Jax))
+
+result = prompt.mask("What is your secret?")
+puts "SECRET = #{result}"
+
+choices = %w(emacs nano vim)
+prompt.enum_select("Select an editor?", choices)
+
+choices = %w(emacs nano vim)
+res = prompt.enum_select("Select an editor?", choices)
+puts "res =#{res}"
+
+choices = [
+  { key: 'y', name: 'overwrite this file', value: :yes },
+  { key: 'n', name: 'do not overwrite this file', value: :no },
+  { key: 'a', name: 'overwrite this file and all later files', value: :all },
+  { key: 'd', name: 'show diff', value: :diff },
+  { key: 'q', name: 'quit; do not overwrite this file ', value: :quit }
+]
+prompt.expand('Overwrite Gemfile?', choices)
+
+

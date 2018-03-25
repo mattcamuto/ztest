@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "ztest"
+require "Ztest/demo/demo_cli"
+
+
+Ztest::Demo::DemoCli.new.run_loop
