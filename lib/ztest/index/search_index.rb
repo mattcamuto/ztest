@@ -6,6 +6,8 @@ require 'ztest/index/index_schema'
 module Ztest
   module Index
     class SearchIndex
+      include ::Ztest::Helper::SafeStr
+
       class SearchIndexDocumentError < StandardError
       end
 
@@ -21,7 +23,7 @@ module Ztest
       end
 
       def find_or_create_schema(schema_name)
-        @index_schemas[schema_name.to_s.downcase.delete(' ')] ||= ::Ztest::Index::IndexSchema.new(schema_name)
+        @index_schemas[safe_str(schema_name)] ||= ::Ztest::Index::IndexSchema.new(schema_name)
       end
 
       # TODO::Test
@@ -35,12 +37,12 @@ module Ztest
         @document_validator.validate!(document)
         tokenized = @tokenizer.tokenize(document)
         @document_store.write(document_key(index, document), document)
-        @inverted_index.add(index.to_s.downcase.delete(' '), tokenized)
-        @index_schemas[index.to_s.downcase.delete(' ')].add_document_keys(tokenized.keys)
+        @inverted_index.add(safe_str(index), tokenized)
+        @index_schemas[safe_str(index)].add_document_keys(tokenized.keys)
       end
 
       def index_keys(index)
-        @index_schemas[index.to_s.downcase.delete(' ')].document_keys
+        @index_schemas[safe_str(index)].document_keys
       end
 
       def find(index, id)
@@ -61,20 +63,19 @@ module Ztest
       private
 
       def validate_index(index)
-        unless @index_schemas[index.to_s.downcase.delete(' ')]
+        unless @index_schemas[safe_str(index)]
           raise SearchIndexDocumentError.new("SearchIndex: The index schema #{index} is not defined")
         end
       end
 
 
       def document_index_pk(index, id)
-        [index.to_s.downcase.delete(' '), id].join(':')
+        [safe_str(index), id].join(':')
       end
 
       def document_key(index, document)
-        [index.to_s.downcase.delete(' '), document['_id']].join(':')
+        [safe_str(index), document['_id']].join(':')
       end
-
     end
   end
 end

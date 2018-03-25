@@ -114,7 +114,14 @@ RSpec.describe Ztest::Index::SearchIndex do
     end
   end
 
-  describe '#search' do
+  describe '#index_names' do
+    let(:search_index) { Ztest::Index::SearchIndex.new(nil, nil, nil, nil) }
+
+    it 'gets expected index names' do
+      search_index.find_or_create_schema('myindex1')
+      search_index.find_or_create_schema('myindex2')
+      expect(search_index.index_names).to match_array(%w(myindex1 myindex2))
+    end
   end
 
 end

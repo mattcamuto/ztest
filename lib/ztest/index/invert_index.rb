@@ -13,7 +13,7 @@ module Ztest
         @inverted_index = {}
       end
 
-      # all entities are keyed as string for
+      # all entities are keyed as string for this excercise
       def add(entity_type, tokenized_document)
         doc_id = extract_id(tokenized_document) || raise(Ztest::Index::InvertIndex::IndexError.new('InvertIndex: _id field missing.'))
         safe_entity_type = safe_str(entity_type)
