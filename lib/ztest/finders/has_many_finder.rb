@@ -1,7 +1,7 @@
 module Ztest
   module Finders
     class HasManyFinder
-
+      attr_accessor :child_index_name
 
 
       def initialize(child_index_name, child_index_key, search_adapter)
@@ -14,11 +14,6 @@ module Ztest
       def composite_index_key
         [@child_index_name,@child_index_key].join('-')
       end
-
-      def child_index_name
-        @child_index_name
-      end
-
 
       # eager load
       def load_related_objects(target_objects)

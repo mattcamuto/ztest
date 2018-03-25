@@ -1,8 +1,5 @@
 require 'spec_helper'
 
-# TODO:: Special character removal in strings
-
-
 RSpec.describe Ztest::DocumentTokenizer do
 
   context 'with a hash input' do

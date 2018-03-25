@@ -1,5 +1,6 @@
-# TODO:: Number vs string
-# TODO:: Exception on nil parser and nil filter
+# Basic tokenizer
+# Converts all to string for this test.
+# Custom filters and parsers are allowed.
 
 module Ztest
   class DocumentTokenizer

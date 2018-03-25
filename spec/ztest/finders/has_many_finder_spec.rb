@@ -5,6 +5,12 @@ RSpec.describe Ztest::Finders::HasManyFinder do
   let(:search_index) { instance_double('Ztest::Index::SearchIndex') }
   let(:finder) { Ztest::Finders::HasManyFinder.new(:tickets, :submitter_id, search_index) }
 
+  describe '#composite_index_key' do
+    it 'has expected key' do
+      expect(finder.composite_index_key).to eq('tickets-submitter_id')
+    end
+  end
+
   describe '#load_related_objects' do
     context 'invalid collection ' do
       it 'returns [] if empty input' do
@@ -52,12 +58,8 @@ RSpec.describe Ztest::Finders::HasManyFinder do
         expect(finder.filter_loaded_objects(nil, 123)).to eq([])
         expect(finder.filter_loaded_objects([], '123')).to eq([])
       end
-
     end
-
   end
-
-
 end
 
 
