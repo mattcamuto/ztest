@@ -3,19 +3,16 @@ module Ztest
     class HasManyFinder
       attr_accessor :child_index_name
 
-
       def initialize(child_index_name, child_index_key, search_adapter)
         @child_index_name = child_index_name
         @child_index_key = child_index_key
         @search_adapter = search_adapter
       end
 
-      # TODO:: Test please
       def composite_index_key
         [@child_index_name,@child_index_key].join('-')
       end
 
-      # eager load
       def load_related_objects(target_objects)
         return [] if target_objects.empty?
         ids = target_objects.map { |hsh| hsh['_id'] }.uniq

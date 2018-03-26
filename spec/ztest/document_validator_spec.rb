@@ -1,8 +1,6 @@
 require 'spec_helper'
 require 'ztest/document_validator'
 
-# TODO:: Special character removal in strings
-
 RSpec.describe Ztest::DocumentValidator do
   let(:validator) { Ztest::DocumentValidator.new }
 

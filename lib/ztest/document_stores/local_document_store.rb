@@ -15,7 +15,6 @@ module Ztest
         @document_store = {}
       end
 
-      # Put the element
       def write(key, value)
         unless value.respond_to?(:to_hash)
           raise DocumentError.new('LocalDocumentStore: value must respond_to?(:hash)')
@@ -28,7 +27,6 @@ module Ztest
         @document_store.delete(key)
       end
 
-      # read an element, nil
       def read(key)
         raise KeyException.new('LocalDocumentStore does not support a nil key') if key.nil?
         @document_store[key]

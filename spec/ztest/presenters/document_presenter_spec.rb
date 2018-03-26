@@ -3,8 +3,6 @@ require 'spec_helper'
 require 'ztest/index/index_schema'
 require 'ztest/presenters/document_presenter'
 
-# TODO:: Special character removal in strings
-
 RSpec.describe Ztest::Presenters::DocumentPresenter do
 
   let(:hash) do
@@ -28,8 +26,6 @@ RSpec.describe Ztest::Presenters::DocumentPresenter do
   describe '#pretty_title' do
     let(:schema) { ::Ztest::Index::IndexSchema.new('my_index') }
 
-
-
     it 'used name field by default' do
       expect(presenter.pretty_title).to eq('blarg (123)')
     end
@@ -37,10 +33,6 @@ RSpec.describe Ztest::Presenters::DocumentPresenter do
     it 'used schema defined over_ride' do
       schema.title_field = 'subject'
       expect(presenter.pretty_title).to eq('my subject (123)')
-
     end
-
   end
-
-
 end

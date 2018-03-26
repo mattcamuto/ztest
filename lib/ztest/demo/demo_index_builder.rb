@@ -31,7 +31,6 @@ module Ztest
         @validator ||= Ztest::DocumentValidator.new
       end
 
-      # TODO:: Add in filters and validators
       def tokenizer
         @tokenizer ||= begin
           Ztest::DocumentTokenizer.new

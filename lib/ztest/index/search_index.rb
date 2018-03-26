@@ -26,11 +26,9 @@ module Ztest
         @index_schemas[safe_str(schema_name)] ||= ::Ztest::Index::IndexSchema.new(schema_name)
       end
 
-      # TODO::Test
       def index_names
         @index_schemas.keys
       end
-
 
       def add_document(index, document)
         validate_index(index)
@@ -67,7 +65,6 @@ module Ztest
           raise SearchIndexDocumentError.new("SearchIndex: The index schema #{index} is not defined")
         end
       end
-
 
       def document_index_pk(index, id)
         [safe_str(index), id].join(':')
