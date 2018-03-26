@@ -22,11 +22,16 @@ The implementation is modular and the following functions are separate:
 The invert index has the following propertied 
   * All keys are strings (non string converted to string)
   * All strings are trimmed and downcase
-  * Blank fields will be indexed
+  * Blank fields will be indexed (And are searchable)  
     
 Thus our searches will not be case sensitive. Also note that string fields
 do not currently remove 'special characters'. In in ideal world the string '(Matt)' should 
 be index with both '(matt)' and 'matt'. In this case the latter is not true... yet!
+
+We have also applied basic date/time parsing (You can parse on the date or full string) and also 
+basic domain parsing. 'matt.com' and 'matt' with both be searchable in domain_names field. We also restrict
+any string of length less than 3 to not be indexed. In a real down search engine this would probably
+be served from a file containing stop words.
 
 The application also has custom and configurable 'has-many' finders. This allows for eager loading 
 and post load filtering. This will avoid doing an 'n+1' when loading say a list of users and then associated
