@@ -5,7 +5,7 @@ require 'ztest'
 
 RSpec.describe 'integration' do
   context 'with supplied zd fixtures' do
-    let(:search_index) { Ztest::Demo::DemoIndexBuilder.load_and_create_index }
+    let(:search_index) { Ztest::Demo::DemoIndexBuilder.new.load_and_create_index }
 
     describe '#find' do
       it 'finds existing documents' do

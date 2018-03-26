@@ -11,7 +11,7 @@ require 'ztest/demo/demo_view_builder'
 
 RSpec.describe 'view integration' do
 
-  let(:search_index) { Ztest::Demo::DemoIndexBuilder.load_and_create_index }
+  let(:search_index) { Ztest::Demo::DemoIndexBuilder.new.load_and_create_index }
   let(:demo_view_builder) { Ztest::Demo::DemoViewBuilder.new(search_index) }
 
   context 'view integration' do

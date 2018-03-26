@@ -19,12 +19,13 @@ module Ztest
               exit if index_response == 'QUIT'
               @current_index = index_response
             else
+              puts ' Please use Control-C at anytime to return home.'
               field = @prompt.select("Choose your field to search in index '#{@current_index}'?", current_search_keys)
               to_search = @prompt.ask("Value to search for field '#{field}'?")
               responses = search_view.search_and_present(@current_index, field, to_search)
               dump_responses(responses)
             end
-          rescue TTY::Reader::InputInterrupt => err
+          rescue TTY::Reader::InputInterrupt
             @current_index = nil
           end
         end
@@ -53,6 +54,7 @@ module Ztest
       end
 
       def intro
+        puts " "
         puts " ====== Welcome to simple search ======"
         puts " Please use arrows and keyboard to enter desired input."
         puts " Please use Control-C at anytime to return home."
@@ -61,7 +63,7 @@ module Ztest
       end
 
       def search_index
-        @search_index ||= Ztest::Demo::DemoIndexBuilder.load_and_create_index
+        @search_index ||= Ztest::Demo::DemoIndexBuilder.new.load_and_create_index
       end
 
       def search_view
