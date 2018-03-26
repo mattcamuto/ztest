@@ -12,6 +12,7 @@ The implementation is modular and the following functions are separate:
   * Invert Index (Inverted keyword index, does not account for term frequency)
   * Document store (Stores the actual raw docs)
   * Document tokenizer (Split out all terms in a hash)
+  * Document validator
   * Custom field parsers (For example split and break a date field)
   * Custom field filters (For example 'no words less than 3 characters')
   * Custom has-many finder (for auto relation building)
