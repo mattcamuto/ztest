@@ -44,10 +44,10 @@ The `zrtest/demo` directory features the `demo_cli` class which will drive the
   
 ## Installation
 
-This project was build using a gem configuration. The gem layout 
+This project was built using a gem configuration. The gem layout 
 gives you some nice pre-cooked structure which is easy to bootstrap.
 
-For this project all you need to do is run bundler.
+For this project all you need to do is run bundler:
 
     $ bundle
 
@@ -55,7 +55,7 @@ For this project all you need to do is run bundler.
 
 To use the simple cli app simply type:
 
-     bin/demo_cli
+    $ bin/demo_cli
      
 This will allow you to run the interactive CLI app. You simple use the
 mouse to drive the cli and can type in only the search term you want. In the cli app 'Control-C' 
@@ -63,16 +63,16 @@ will always bring you back to the home menu, from which you can 'QUIT' from the 
 
 ## Tests
 
-The code is tests with rspec. Code coverage should be high and tests span both 
+The code is tested with rspec. Code coverage should be high and tests span both 
 unit and integration. The only class that is not tested, sadly, is the `DemoCli` class which 
 is the small cli wrapper. I was having a hard time finding a way to property and easily 
 externally drive the cli app (Wanted to do capybara for a shell-app). To run simply type:
 
-     bundle exec rspec
+     $ bundle exec rspec
      
 Also include is guard, if you are developing and test-driving and adding features. To use simply:
      
-     bundle exec guard
+     $ bundle exec guard
 
 The associated `Guardile` has the default configuration. It has not been pruned.
 
