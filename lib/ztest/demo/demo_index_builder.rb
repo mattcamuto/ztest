@@ -33,7 +33,19 @@ module Ztest
 
       def tokenizer
         @tokenizer ||= begin
-          Ztest::DocumentTokenizer.new
+          len_filter = ->(value) { value.length < 3 }
+
+          domain_parser = ->(value) { [value.split('.').first, value]}
+          time_parser = ->(value) { Time.parse(value).utc.to_s.split(' ')[0, 2]}
+
+          parsers = {
+            'domain_names' => domain_parser,
+            'created_at' => time_parser,
+            'due_at' => time_parser,
+          }
+
+
+          Ztest::DocumentTokenizer.new(parsers: parsers, filters: [len_filter])
         end
       end
 
